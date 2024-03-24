@@ -17,15 +17,15 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)  # sets initial direction to clockwise
 
-try: 
-    print("Running Motor")
-    while True:
-        GPIO.output(STEP, GPIO.HIGH)
-        print("Running")
+# try: 
+#     print("Running Motor")
+#     while True:
+#         GPIO.output(STEP, GPIO.HIGH)
+#         print("Running")
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
-    print("died")
+# except KeyboardInterrupt:
+#     GPIO.cleanup()
+#     print("died")
 
 
 

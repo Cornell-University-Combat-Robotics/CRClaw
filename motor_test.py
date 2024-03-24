@@ -17,34 +17,34 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)  # sets initial direction to clockwise
 
-# try: 
-#     print("Running Motor")
-#     while True:
-#         GPIO.output(STEP, GPIO.HIGH)
-#         print("Running")
+try: 
+    print("Running Motor")
+    while True:
+        GPIO.output(STEP, GPIO.HIGH)
+        print("Running")
 
-# except KeyboardInterrupt:
-#     GPIO.cleanup()
-#     print("died")
-
-
-
-step_count = SPR
-delay = .0208
+except KeyboardInterrupt:
+    GPIO.cleanup()
+    print("died")
 
 
-# for like 2 seconds, we pulse the motor to rotate clockwise
-for x in range(step_count):
-    GPIO.output(STEP, GPIO.HIGH)
-    sleep(delay)
-    GPIO.output(STEP, GPIO.LOW)
-    sleep(delay)
 
-sleep(.5)
-GPIO.output(DIR, CCW) # now we go counter clockwise
+# step_count = SPR
+# delay = .0208
 
-for x in range(step_count):
-    GPIO.output(STEP, GPIO.HIGH)
-    sleep(delay)
-    GPIO.output(STEP, GPIO.LOW)
-    sleep(delay)
+
+# # for like 2 seconds, we pulse the motor to rotate clockwise
+# for x in range(step_count):
+#     GPIO.output(STEP, GPIO.HIGH)
+#     sleep(delay)
+#     GPIO.output(STEP, GPIO.LOW)
+#     sleep(delay)
+
+# sleep(.5)
+# GPIO.output(DIR, CCW) # now we go counter clockwise
+
+# for x in range(step_count):
+#     GPIO.output(STEP, GPIO.HIGH)
+#     sleep(delay)
+#     GPIO.output(STEP, GPIO.LOW)
+#     sleep(delay)

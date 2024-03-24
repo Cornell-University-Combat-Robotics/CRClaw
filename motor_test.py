@@ -22,7 +22,8 @@ try:
         GPIO.output(STEP, GPIO.HIGH)
 
 except KeyboardInterrupt:
-    print("hi")
+    GPIO.cleanup()
+    print("died")
 
 
 

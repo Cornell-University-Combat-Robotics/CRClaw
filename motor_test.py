@@ -17,6 +17,15 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)  # sets initial direction to clockwise
 
+try: 
+    while True:
+        GPIO.output(STEP, GPIO.HIGH)
+
+except KeyboardInterrupt:
+    print("hi")
+
+
+
 step_count = SPR
 delay = .0208
 

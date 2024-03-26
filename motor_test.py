@@ -17,7 +17,7 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)  # sets initial direction to clockwise
 
-delay = .0008
+delay = .00000008
 
 try: 
     print("Running Motor")

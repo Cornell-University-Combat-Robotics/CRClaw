@@ -17,10 +17,15 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)  # sets initial direction to clockwise
 
+delay = .0208
+
 try: 
     print("Running Motor")
     while True:
         GPIO.output(STEP, GPIO.HIGH)
+        sleep(delay)
+        GPIO.output(STEP, GPIO.LOW)
+        sleep(delay)
         print("Running")
 
 except KeyboardInterrupt:

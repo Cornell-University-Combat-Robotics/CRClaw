@@ -8,7 +8,7 @@ STEP = 21 # step GPIO pin
 
 CW = 1 # clockwise
 CCW = 0 # counterclockwise
-SPR = 100 # steps per revolution (360 / 7.5 = 48 so we're turning 7.5 degrees per revolution)
+SPR = 8000 # steps per revolution (360 / 7.5 = 48 so we're turning 7.5 degrees per revolution)
 
 # Note, like we did in autonmous, we may have to switch to hardware pwm (pigpio instead of RPi.GPIO)
 

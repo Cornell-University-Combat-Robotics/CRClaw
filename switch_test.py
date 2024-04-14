@@ -1,5 +1,8 @@
 from switch import Limit
 
 l = Limit(16)
-while(True):
-    print(l.isPressed())
+try:
+    while(True):
+        print(l.isPressed())
+except: 
+    l.cleanup()

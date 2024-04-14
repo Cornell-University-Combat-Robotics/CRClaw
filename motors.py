@@ -46,7 +46,7 @@ class Motor():
             sleep(Motor.delay)
 
     def stop(self):
-        GPIO.output(Motor.DIR)
+        GPIO.output(Motor.DIRÍ)
         sleep(Motor.delay)
         GPIO.output(0, GPIO.HIGH)
 

@@ -38,6 +38,7 @@ step_count = SPR
 delay = .0008
 
 
+
 # for like 2 seconds, we pulse the motor to rotate clockwise
 for x in range(step_count):
     GPIO.output(STEP, GPIO.HIGH)

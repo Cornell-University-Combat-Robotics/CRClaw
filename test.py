@@ -1,3 +1,5 @@
 from motors import Motor
 
-Motor.move(1,2)
+m = Motor(21)
+
+m.move(1,2)

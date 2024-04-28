@@ -34,13 +34,13 @@ class Limit():
         # Set the initial state and pull-up resistor for the button
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         # Initialize the button state and previous state
+        global switch_state
         switch_state = GPIO.input(pin)
-        prev_switch_state = switch_state
+        global prev_switch_state
 
     # Define a function to handle button presses
-    def button_callback(self,channel):
-        global switch_state
-        switch_state = GPIO.input(self.pin)
+    def button_callback(self):
+        self.switch_state = GPIO.input(self.pin)
 # Add an event listener for the button press
     def add_event(self):
         GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=self.button_callback, bouncetime=Limit.DEBOUNCE_TIME_MS)

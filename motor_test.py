@@ -5,7 +5,6 @@ import RPi.GPIO as GPIO # this gives us access to the pi pins
 DIR = 20 # direction GPIO pin
 STEP = 21 # step GPIO pin
 
-
 CW = 1 # clockwise
 CCW = 0 # counterclockwise
 SPR = 8000 # steps per revolution (360 / 7.5 = 48 so we're turning 7.5 degrees per revolution)
@@ -32,12 +31,8 @@ GPIO.output(DIR, CW)  # sets initial direction to clockwise
 #     GPIO.cleanup()
 #     print("died")
 
-
-
 step_count = SPR
 delay = .0008
-
-
 
 # for like 2 seconds, we pulse the motor to rotate clockwise
 for x in range(step_count):

@@ -49,6 +49,7 @@ class Motor():
         GPIO.output(self.dir_pin)
         sleep(Motor.delay)
         GPIO.output(0, GPIO.HIGH)
+        print("stop")
 
     def cleanup(self):
         GPIO.cleanup

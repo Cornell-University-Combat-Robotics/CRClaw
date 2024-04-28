@@ -1,4 +1,3 @@
-import motors as motor
+from motors import Motor
 
-
-motor.move(1,2)
+Motor.move(1,2)

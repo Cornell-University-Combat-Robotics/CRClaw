@@ -1,4 +1,5 @@
 from time import sleep
+import RPi
 import RPi.GPIO as GPIO # this gives us access to the pi pins
 
 # PINs (alter to be accurate)
@@ -28,6 +29,7 @@ class Motor():
         
     
     # NOTE: doesn't check if hit limit switch
+    # direction is CW or CCW 
     def move(self, direction, steps = 1): 
         # move (increment step) in direction
         if(steps > 1):
@@ -37,6 +39,7 @@ class Motor():
                 sleep(Motor.delay)
                 GPIO.output(Motor.STEP, GPIO.LOW)
                 sleep(Motor.delay)
+            print("moved")
         else:
             # one step
             GPIO.output(Motor.DIR, direction)

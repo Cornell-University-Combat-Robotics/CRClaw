@@ -6,7 +6,7 @@ from switch import Limit
 #         print(l.isPressed())
 # except: 
 #     l.cleanup()
-l = Limit(16)
+l = Limit(23)
 #l.button_callback()
 l.add_event()
 try:

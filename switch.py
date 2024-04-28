@@ -43,7 +43,8 @@ class Limit():
         self.switch_state = GPIO.input(self.pin)
 # Add an event listener for the button press
     def add_event(self):
-        GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=self.button_callback, bouncetime=Limit.DEBOUNCE_TIME_MS)
+        #GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=self.button_callback, bouncetime=Limit.DEBOUNCE_TIME_MS)
+        GPIO.add_event_detect(self.pin, GPIO.BOTH)
 
     def is_touched():
         # Check if the button state has changed

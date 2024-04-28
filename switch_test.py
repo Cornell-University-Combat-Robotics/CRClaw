@@ -7,7 +7,7 @@ from switch import Limit
 # except: 
 #     l.cleanup()
 l = Limit(16)
-l.button_callback()
+#l.button_callback()
 l.add_event()
 try:
     while(True):

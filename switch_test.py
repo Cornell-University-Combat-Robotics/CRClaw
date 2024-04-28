@@ -7,11 +7,12 @@ from switch import Limit
 # except: 
 #     l.cleanup()
 l = Limit(23)
-#l.button_callback()
-l.add_event()
-try:
-    while(True):
-        l.is_touched()
-except:
-    l.cleanup()
+# #l.button_callback()
+# l.add_event()
+# try:
+#     while(True):
+#         l.is_touched()
+# except:
+#     l.cleanup()
+l.cleanup()
 

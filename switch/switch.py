@@ -28,7 +28,7 @@ class Limit():
     # SWITCH_PIN = 16
     DEBOUNCE_TIME_MS = 200  # 200 milliseconds
 
-    def __init__(self,pin):
+    def __init__(self, pin):
         self.pin = pin     # Define the GPIO pin for your button
         GPIO.setmode(GPIO.BCM) # Set the GPIO mode to BCM
         # Set the initial state and pull-up resistor for the button

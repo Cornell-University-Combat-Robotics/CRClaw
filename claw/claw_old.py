@@ -1,7 +1,6 @@
 import pygame
 from time import sleep
 
-
 pygame.init()
 # print(pygame.joystick.get_count())
 controller = pygame.joystick.Joystick(0)

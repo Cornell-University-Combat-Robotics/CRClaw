@@ -1,8 +1,5 @@
 from time import sleep
-import RPi
 import RPi.GPIO as GPIO # this gives us access to the pi pins
-
-
 
 class Motor():
     # PINs (alter to be accurate)
@@ -53,5 +50,3 @@ class Motor():
 
     def cleanup(self):
         GPIO.cleanup
-
-    

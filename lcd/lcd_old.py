@@ -11,13 +11,12 @@
 # modules
 from time import sleep
 
-
-
 # very important
 # this module needs to be saved in the Raspberry Pi Pico in order for the LCD I2C to be used 
 
-# creating an I2C object, specifying the data (SDA) and clock (SCL) pins used in the Raspberry Pi Pico
-# any SDA and SCL pins in the Raspberry Pi Pico can be used (check documentation for SDA and SCL pins)
+    # input the pin numbers
+        # creating an I2C object, specifying the data (SDA) and clock (SCL) pins used in the Raspberry Pi Pico
+        # any SDA and SCL pins in the Raspberry Pi Pico can be used (check documentation for SDA and SCL pins)
 i2c = I2C(0, sda=Pin(0), scl=Pin(1), freq=400000)
 
 # getting I2C address
@@ -27,20 +26,13 @@ I2C_ADDR = i2c.scan()[0]
 # LCD number of rows = 2, number of columns = 16
 lcd = I2cLcd(i2c, I2C_ADDR, 2, 16)
 
+# use pin1 and pin2 here? 
 LED = Pin(15, Pin.OUT) 
 BUTTON = Pin(16, Pin.IN)    # creating Push Button object, setting it as IN
 
-
-
 str_pad = "_"
-myString = "Insert Coin" #0-10
-# padded = myString
-# for i in range(len(myString), 16)
-#     padded = padded + " "
-# myString = str_pad + myString
-
-startname = " Press button to start "
-
+coinmsg = "Insert Coin" #0-10
+startmsg = "Press button to start "
 leng = len(startname) 
 num = 16
 credit = 1

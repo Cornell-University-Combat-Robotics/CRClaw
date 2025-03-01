@@ -43,10 +43,10 @@ try:
             prev_switch_state = switch_state
 
 
-        # if switch_state == GPIO.HIGH:
-        #     print("The limit switch: UNTOUCHED")
-        # else:
-        #     print("The limit switch: TOUCHED")
+        if switch_state == GPIO.HIGH:
+            print("The limit switch: UNTOUCHED")
+        else:
+            print("The limit switch: TOUCHED")
 
 except KeyboardInterrupt:
     # Clean up GPIO on exit

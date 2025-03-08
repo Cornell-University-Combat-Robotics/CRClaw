@@ -4,7 +4,7 @@ import pygame
 
 pygame.mixer.init()
 path = os.getcwd()
-sound_files = ["pixaby_audio.mp3"]
+sound_files = ["countdown.mp3"]
 pygame.mixer.music.set_volume(1)
 
 for sound_file in sound_files:

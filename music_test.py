@@ -3,7 +3,7 @@ import os
 import pygame
 
 pygame.mixer.init()
-path = os.getcwd()
+path = os.getcwd() + "/"
 sound_files = ["countdown.mp3"]
 pygame.mixer.music.set_volume(1)
 

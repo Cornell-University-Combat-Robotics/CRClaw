@@ -10,7 +10,7 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 # Define the GPIO pin for your button
-SWITCH_PIN = 16
+SWITCH_PIN = 10
 
 # Define debounce time in milliseconds
 DEBOUNCE_TIME_MS = 200  # 200 milliseconds

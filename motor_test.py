@@ -2,8 +2,8 @@ from time import sleep
 import RPi.GPIO as GPIO # this gives us access to the pi pins
 
 # PINs (alter to be accurate)
-DIR = 13 # direction GPIO pin
-STEP = 19 # step GPIO pin
+DIR = 21 # direction GPIO pin
+STEP = 20 # step GPIO pin
 
 CW = 1 # clockwise
 CCW = 0 # counterclockwise

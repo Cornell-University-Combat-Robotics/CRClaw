@@ -1,6 +1,6 @@
 from motors import Motor
 
-m = Motor(21,20)
+m = Motor(20,21)
 
-m.move(1,2)
+m.move(1,8000)
 m.cleanup()

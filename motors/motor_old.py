@@ -1,9 +1,9 @@
 from time import sleep
-import RPi.GPIO as GPIO # this gives us access to the pi pins
+from machine import Pin
 
 class Motor():
     # PINs (alter to be accurate)
-    CW = 1 # clockwise
+    CW = Pin.OUT # clockwise
     CCW = 0 # counterclockwise
     SPR = 8000 # steps per revolution (360 / 7.5 = 48 so we're turning 7.5 degrees per revolution)
     step_count = SPR
@@ -15,11 +15,8 @@ class Motor():
     #joy_inputs list of all joystick directions (booleans) that are being pressed (true)
 
     def __init__(self, step_pin, dir_pin):
-        self.step_pin = step_pin
-        self.dir_pin = dir_pin
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(dir_pin, GPIO.OUT)
-        GPIO.setup(step_pin, GPIO.OUT)
+        self.step_pin = Pin(step_pin, mode=Pin.OUT)
+        self.dir_pin = Pin(step_pin, mode=Pin.OUT)
         GPIO.output(dir_pin, Motor.CW)  # sets initial direction to clockwise
         
     # NOTE: doesn't check if hit limit switch

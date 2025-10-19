@@ -21,7 +21,8 @@
 # https://newbiely.com/tutorials/raspberry-pi/raspberry-pi-limit-switch
 
 
-import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO #from the old one 
+
 
 class Limit():
 
@@ -29,7 +30,7 @@ class Limit():
     DEBOUNCE_TIME_MS = 200  # 200 milliseconds
 
     def __init__(self,pin):
-        self.pin = pin     # Define the GPIO pin for your button
+        self.pin = Pin(step_pin, mode=Pin.IN)     # Define the GPIO pin for your button
         GPIO.setmode(GPIO.BCM) # Set the GPIO mode to BCM
         # Set the initial state and pull-up resistor for the button
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)

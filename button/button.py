@@ -1,13 +1,8 @@
-import RPi.GPIO as GPIO
+from machine import Pin
 
 class Button:
-    def __init__(self, pin):
-        # assign GPIO pin to self
-        self.PIN = pin
-    
-    def is_Pressed(self):
-        # poll GPIO to see if the button was pressed
-        if GPIO.input(self.PIN): 
-            return True 
-        else: 
-            return False
+    def __init__(self, pin_number: int):
+        self.pin = Pin(pin_number, Pin.IN, Pin.PULL_UP)
+
+    def is_pressed(self) -> bool:
+        return self.pin.value() == 0

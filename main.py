@@ -1,3 +1,29 @@
+"""
+
+TODO: 
+Thing we need in this file
+- adapt lcd code in here for class (move file to this branch)
+-- Initialize motors correctly?
+- adapt code for coin sensor class (lowkey needs be threading)
+- adapt for limit switch class
+- optional-ize music/speaker
+- Remove chute sensor
+-- adapt to button class
+-- adapt to joystick class
+-- adapt to claw class
+
+Things we need to do in other files
+- Make class for limit switches
+- Need motor class (side lining)
+- Claw lowering is not ready so....
+- make joystick class
+- make class for open
+- make class for button
+- make class for claw
+
+
+"""
+
 from button.button import Button
 from claw.claw import Claw
 from joystick.joystick import Joystick

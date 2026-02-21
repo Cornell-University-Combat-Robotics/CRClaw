@@ -13,9 +13,9 @@ class Joystick:
         l = self.l_switch.value() # read input from l_switch
         r = self.r_switch.value() # read input from b_switch
         
-        print("forward: " + f)
-        print("back: " + b)
-        print("left: " + l)
-        print("right: " + r)
+        print("forward: " + str(f))
+        print("back: " + str(b))
+        print("left: " + str(l))
+        print("right: " + str(r))
         
         return [f - b, l - r]

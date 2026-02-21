@@ -1,20 +1,14 @@
-import RPi.GPIO as GPIO
-
+from machine import Pin
 from joystick import Joystick
+import time
 
-frontpin = 26
-backpin = 16
-leftpin = 5
-rightpin = 6
+backpin = 2
+leftpin = 3
+frontpin = 4
+rightpin = 5
 
-GPIO.setmode(GPIO.BCM)
+tester = Joystick(frontpin, backpin, leftpin, rightpin)
 
-GPIO.setup(frontpin, GPIO.OUT)
-GPIO.setup(backpin, GPIO.OUT)
-GPIO.setup(leftpin, GPIO.OUT)
-GPIO.setup(rightpin, GPIO.OUT)
-
-tester = Joystick(self, frontpin, backpin, leftpin, rightpin)
-tester.update(self)
-
-GPIO.cleanup()
+while True:
+    tester.update()
+    time.sleep(0.2)

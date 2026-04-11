@@ -1,12 +1,13 @@
-from time import sleep
-import RPi.GPIO as GPIO
+from claw import Claw
+import time
 
-pin = 26
+control_pin = 26
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.OUT)
+tester = Claw(control_pin)
 
-GPIO.output(pin, GPIO.HIGH)
-sleep(2)
-
-GPIO.cleanup()
+while True:
+    tester.update("clamp")
+    time.sleep(3)
+    
+    tester.update("release")
+    time.sleep(3)

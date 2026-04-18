@@ -1,28 +1,34 @@
 from machine import Pin
-import utime
 
 class Sensor:
-    def __init__(self, pin, sensor_type):
-        self.sensor_type = sensor_type # Either "coin" or "chute"
-        self.state = False  # default state (false for no coin/toy detected)
-        self.num_coins_detected = 0
+    def __init__(self, pin, sensor_type="coin"):
+        self.sensor_type = sensor_type
 
+        # try PULL_UP first (most common for break-beam sensors)
         self.pin = Pin(pin, Pin.IN, Pin.PULL_UP)
 
-    def detected(self):
-        new_state = self.pin.value()
-        if new_state == 0 and self.state == 1:
-            self.state = new_state
-            self.num_coins_detected += 1
-            print ("Coins seen: ", self.num_coins_detected)
-        elif new_state == 1 and self.state == 0:
-            # self.state = False
-            self.state = new_state
+        self.last_state = self.pin.value()
+        self.count = 0
 
-    def get_coins(self):
-        return self.num_coins_detected
+    def update(self):
+        current = self.pin.value()
+
+        # Human readable status
+        if current == 1:
+            status = "😮 CLEAR   (beam intact)"
+        else:
+            status = "🫣 BLOCKED (beam broken)"
+
+        print(f"{self.sensor_type}: {status}")
+
+        # Detect transition (CLEAR → BLOCKED)
+        if self.last_state == 1 and current == 0:
+            self.count += 1
+            print(f"{self.sensor_type.upper()} DETECTED! Count = {self.count}")
+
+        self.last_state = current
+        return self.count
 
     def reset(self):
-        self.pin.low()
-        self.num_coins_detected = 0
-        self.state = False
+        self.count = 0
+        print(f"{self.sensor_type}: reset to 0")

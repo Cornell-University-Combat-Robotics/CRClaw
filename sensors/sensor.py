@@ -13,13 +13,13 @@ class Sensor:
     def update(self):
         current = self.pin.value()
 
-        # Human readable status
-        if current == 1:
-            status = "😮 CLEAR   (beam intact)"
-        else:
-            status = "🫣 BLOCKED (beam broken)"
-
-        print(f"{self.sensor_type}: {status}")
+#         # Human readable status
+#         if current == 1:
+#             status = "😮 CLEAR   (beam intact)"
+#         else:
+#             status = "🫣 BLOCKED (beam broken)"
+# 
+#         print(f"{self.sensor_type}: {status}")
 
         # Detect transition (CLEAR → BLOCKED)
         if self.last_state == 1 and current == 0:
@@ -28,7 +28,10 @@ class Sensor:
 
         self.last_state = current
         return self.count
-
+    
+    def detected(self):
+        return self.count > 0
+    
     def reset(self):
         self.count = 0
         print(f"{self.sensor_type}: reset to 0")

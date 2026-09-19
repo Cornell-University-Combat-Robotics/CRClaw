@@ -8,12 +8,11 @@ I2C_NUM_ROWS = 4
 I2C_NUM_COLS = 20
 FREQ = 800000
 
-i2c = I2C(0, scl=Pin(17), sda=Pin(16), freq=FREQ)
+i2c = I2C(0, scl=Pin(21), sda=Pin(20), freq=FREQ)
 lcd = LCD(addr=I2C_ADDR, cols=I2C_NUM_COLS, rows=I2C_NUM_ROWS, i2c=i2c)
 lcd.begin()
 lcd.display()
 lcd.clear()
-
 
 # ---- MESSAGES ------
 lcd_startmsg = "Insert 1 coin to start!"

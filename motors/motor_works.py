@@ -1,10 +1,9 @@
 import rp2
-from machine import Pin, ADC
+from machine import Pin
 import utime
-import time
 
-step = Pin(17)
-direction = Pin(16, Pin.OUT)
+step = Pin(17, Pin.OUT, value=0)
+direction = Pin(16, Pin.OUT, value=0)
 logic_power = Pin(12, Pin.OUT)
 logic_power.value(1)
 print("Made it here")
@@ -22,14 +21,25 @@ def move():
 
 """Instantiate a state machine with the move
 program, at 100000Hz, with set base to step pin."""
-motor = rp2.StateMachine(0, move, freq=16000, set_base=step)
+motor = rp2.StateMachine(0, move, freq=100000, set_base=step)
 
 try:
-    motor.active(0) 
-    direction.value(1)
+    direction.value(0)
     motor.active(1)
+    print ("original start")
     while True:
-        utime.sleep(1)      # keeps the script alive; Ctrl+C / Stop lands here
+        utime.sleep(5)      # keeps the script alive; Ctrl+C / Stop lands here
+        print("motor cc silly")
+        direction.value(1)
+        utime.sleep(5)
+        print("motor died") # when the code if off, there is holding current 
+        motor.active(0)
+        utime.sleep(5)
+        print("motor alive")
+        print("motor cw silly")
+        direction.value(0)
+        motor.active(1)
+        
 except KeyboardInterrupt:
     pass
 finally:

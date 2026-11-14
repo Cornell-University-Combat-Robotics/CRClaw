@@ -26,7 +26,7 @@ Things we need to do in other files
 from button.button import Button
 from claw.claw import Claw
 from joystick.joystick import Joystick
-# from motors.motor import Motor
+from motors.motor import Motor
 from sensors.sensor import Sensor
 from switch.switch import Limit
 
@@ -80,10 +80,9 @@ def main():
     
     button = Button(button_gpio_pin)
 
-#     fbmotor = Motor(fb_motor_dir_pin, fb_motor_step_pin)  # TODO: correctly initialize
-#     lrmotor = Motor(lr_motor_dir_pin, lr_motor_step_pin)  # TODO: correctly initialize
-#     motors = [fbmotor, lrmotor]
-    motors = []
+    fbmotor = Motor(fb_motor_dir_pin, fb_motor_step_pin)
+    lrmotor = Motor(lr_motor_dir_pin, lr_motor_step_pin)
+    motors = [fbmotor, lrmotor]
 
     claw = Claw(claw_motor_pin, claw_close_pin)
     joystick = Joystick(
@@ -102,12 +101,29 @@ def main():
     while True:
         lcd.clear()
         lcd.print(lcd_startmsg)
+        print("STARTING ROUND")
         round(coin_sensor, lcd, button, motors, claw, joystick, end_switches)
 
 # resets the game
 def reset(lcd, coin_sensor):
     lcd.clear()
     coin_sensor.count -= 1
+
+
+# move claw to chute
+def claw_reset(motors, end_switches):
+    at_front = end_switches[0].is_touched()
+    at_left = end_switches[2].is_touched()
+    motors[0].move(0)
+    motors[1].move(0)
+    while not at_front or not at_left:
+        if at_front:
+            motors[0].stop()
+        if at_left:
+            motors[1].stop()
+    motors[0].stop()
+    motors[1].stop()
+
 
 # Contains logic for one round of the game. Processes a coin insertion (which begins the game),
 # button presses, joystick movement, and game duration.
@@ -121,8 +137,10 @@ def round(
     end_switches: list[Switch],
 ):
     while True:
+        print("Waiting for coin")
         coin_sensor.update()
         if coin_sensor.detected():
+            print("COIN DETECTED")
             lcd.clear()
             lcd.print(lcd_playmsg)
             break
@@ -134,7 +152,7 @@ def round(
             claw.go_down()
             claw.clamp()
             claw.go_up()
-#             	motors.reset()
+            claw_reset()
             claw.release()
 
             lcd.clear()
@@ -144,34 +162,36 @@ def round(
             break
 
 #         # poll joystick movement, if joystick is at edge, only move if it is moving the opposite way
-#         else:
-#             direction = joystick.update()  # converts FBRL array to a length 2 array
-#             # at left end
-#             if end_switches[1].is_touched():
-#                 motors[0].move(direction.get(0))  # fbmotor1
-#                 if direction.get(1) == POS:  # or NEG, idk, whichever is right
-#                     motors[1].move(direction.get(1))  # lrmotor
-# 
-#             # at right end
-#             elif end_switches[3].is_touched():
-#                 motors[0].move(direction.get(0))  # fbmotor1
-#                 if direction.get(1) == NEG:  # or POS, idk, whichever is left
-#                     motors[1].move(direction.get(1))  # lrmotor
-# 
-#             # at front end
-#             elif end_switches[0].is_touched():
-#                 motors[1].move(direction.get(1))  # lrmotor
-#                 if direction.get(0) == POS:
-#                     motors[0].move(direction.get(0))  # fbmotor1
-#             
-#             # at back end
-#             elif end_switches[1].is_touched():
-#                 motors[1].move(direction.get(1))  # lrmotor
-#                 if direction.get(0) == NEG:
-#                     motors[0].move(direction.get(0))  # fbmotor
-# 
-#             else:  # move as usual
-#                 motors[0].move(direction.get(0))  # fbmotor
-#                 motors[1].move(direction.get(1))  # lrmotor
+        else:
+            direction = joystick.update()  # converts FBRL array to a length 2 array
+            # at left end
+            if end_switches[1].is_touched():
+                motors[0].move(direction.get(0))  # fbmotor1
+                if direction.get(1) == POS:  # or NEG, idk, whichever is right
+                    motors[1].move(direction.get(1))  # lrmotor
+
+            # at right end
+            elif end_switches[3].is_touched():
+                motors[0].move(direction.get(0))  # fbmotor1
+                if direction.get(1) == NEG:  # or POS, idk, whichever is left
+                    motors[1].move(direction.get(1))  # lrmotor
+
+            # at front end
+            elif end_switches[0].is_touched():
+                motors[1].move(direction.get(1))  # lrmotor
+                if direction.get(0) == POS:
+                    motors[0].move(direction.get(0))  # fbmotor1
+            
+            # at back end
+            elif end_switches[1].is_touched():
+                motors[1].move(direction.get(1))  # lrmotor
+                if direction.get(0) == NEG:
+                    motors[0].move(direction.get(0))  # fbmotor
+
+            else:  # move as usual
+                motors[0].move(direction.get(0))  # fbmotor
+                motors[1].move(direction.get(1))  # lrmotor
 
 main()
+
+

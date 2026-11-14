@@ -60,8 +60,15 @@ boundary_rswitch_pin = 8 # FIX
 boundary_fswitch_pin = 9 # FIX
 boundary_bswitch_pin = 10 # FIX
 claw_motor_pin = 12 # FIX
+claw_motor_dir_pin = 23 # FIX
 claw_close_pin = 13 # FIX
 coin_sensor_pin = 11
+
+fb_motor_step_pin = 21
+fb_motor_dir_pin = 20
+lr_motor_step_pin = 19
+lr_motor_dir_pin = 18
+
 
 # -----------------------------------------------------------
 
@@ -73,8 +80,8 @@ def main():
     
     button = Button(button_gpio_pin)
 
-#     fbmotor = Motor()  # TODO: correctly initialize
-#     lrmotor = Motor()  # TODO: correctly initialize
+#     fbmotor = Motor(fb_motor_dir_pin, fb_motor_step_pin)  # TODO: correctly initialize
+#     lrmotor = Motor(lr_motor_dir_pin, lr_motor_step_pin)  # TODO: correctly initialize
 #     motors = [fbmotor, lrmotor]
     motors = []
 

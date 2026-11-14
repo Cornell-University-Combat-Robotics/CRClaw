@@ -1,51 +1,14 @@
-from time import sleep
-import RPi.GPIO as GPIO # this gives us access to the pi pins
+from motors.motor import Motor
+import time
 
-# PINs (alter to be accurate)
-DIR = 21 # direction GPIO pin
-STEP = 20 # step GPIO pin
 
-CW = 1 # clockwise
-CCW = 0 # counterclockwise
-SPR = 8000 # steps per revolution (360 / 7.5 = 48 so we're turning 7.5 degrees per revolution)
+motor_step_pin = 17
+motor_dir_pin = 16
 
-# Note, like we did in autonmous, we may have to switch to hardware pwm (pigpio instead of RPi.GPIO)
+test_motor = Motor(motor_dir_pin, motor_step_pin)
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(DIR, GPIO.OUT)
-GPIO.setup(STEP, GPIO.OUT)
-GPIO.output(DIR, CW)  # sets initial direction to clockwise
-
-# delay = .0008
-
-# try: 
-#     print("Running Motor")
-#     while True:
-#         GPIO.output(STEP, GPIO.HIGH)
-#         sleep(delay)
-#         GPIO.output(STEP, GPIO.LOW)
-#         sleep(delay)
-#         print("Running")
-
-# except KeyboardInterrupt:
-#     GPIO.cleanup()
-#     print("died")
-
-step_count = SPR
-delay = .0008
-
-# for like 2 seconds, we pulse the motor to rotate clockwise
-for x in range(step_count):
-    GPIO.output(STEP, GPIO.HIGH)
-    sleep(delay)
-    GPIO.output(STEP, GPIO.LOW)
-    sleep(delay)
-
-sleep(.5)
-GPIO.output(DIR, CCW) # now we go counter clockwise
-
-for x in range(step_count):
-    GPIO.output(STEP, GPIO.HIGH)
-    sleep(delay)
-    GPIO.output(STEP, GPIO.LOW)
-    sleep(delay)
+print("MOVING")
+test_motor.move(0)
+time.sleep(1)
+test_motor.stop()
+print("STOPPED")

@@ -51,10 +51,10 @@ lcd_failmsg = "You Failed. Try again with Another Coin"
 lcd_sda_pin = 16 
 lcd_scl_pin = 17
 button_gpio_pin = 27
-joystick_f_switch_pin = 4
-joystick_b_switch_pin = 2
-joystick_l_switch_pin = 3
-joystick_r_switch_pin = 5
+joystick_f_switch_pin = 5 #grey
+joystick_b_switch_pin = 3 #purple
+joystick_l_switch_pin = 2 #green
+joystick_r_switch_pin = 4 #blue
 boundary_lswitch_pin = 7 # FIX
 boundary_rswitch_pin = 8 # FIX
 boundary_fswitch_pin = 9 # FIX
@@ -136,8 +136,10 @@ def round(
     joystick: Joystick,
     end_switches: list[Switch],
 ):
+
+    print("Waiting for coin")
+
     while True:
-        print("Waiting for coin")
         coin_sensor.update()
         if coin_sensor.detected():
             print("COIN DETECTED")
@@ -166,31 +168,31 @@ def round(
             direction = joystick.update()  # converts FBRL array to a length 2 array
             # at left end
             if end_switches[1].is_touched():
-                motors[0].move(direction.get(0))  # fbmotor1
-                if direction.get(1) == POS:  # or NEG, idk, whichever is right
-                    motors[1].move(direction.get(1))  # lrmotor
+                motors[0].move(direction[0])  # fbmotor1
+                if direction[1] == POS:  # or NEG, idk, whichever is right
+                    motors[1].move(direction[1])  # lrmotor
 
             # at right end
             elif end_switches[3].is_touched():
-                motors[0].move(direction.get(0))  # fbmotor1
-                if direction.get(1) == NEG:  # or POS, idk, whichever is left
-                    motors[1].move(direction.get(1))  # lrmotor
+                motors[0].move(direction[0])  # fbmotor1
+                if direction[1] == NEG:  # or POS, idk, whichever is left
+                    motors[1].move(direction[1])  # lrmotor
 
             # at front end
             elif end_switches[0].is_touched():
-                motors[1].move(direction.get(1))  # lrmotor
-                if direction.get(0) == POS:
-                    motors[0].move(direction.get(0))  # fbmotor1
+                motors[1].move(direction[1])  # lrmotor
+                if direction[0] == POS:
+                    motors[0].move(direction[0])  # fbmotor1
             
             # at back end
             elif end_switches[1].is_touched():
-                motors[1].move(direction.get(1))  # lrmotor
-                if direction.get(0) == NEG:
-                    motors[0].move(direction.get(0))  # fbmotor
+                motors[1].move(direction[1])  # lrmotor
+                if direction[0] == NEG:
+                    motors[0].move(direction[0])  # fbmotor
 
             else:  # move as usual
-                motors[0].move(direction.get(0))  # fbmotor
-                motors[1].move(direction.get(1))  # lrmotor
+                motors[0].move(direction[0])  # fbmotor
+                motors[1].move(direction[1])  # lrmotor
 
 main()
 

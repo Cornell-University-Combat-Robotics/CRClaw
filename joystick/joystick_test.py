@@ -1,5 +1,5 @@
 from machine import Pin
-from joystick import Joystick
+from joystick.joystick import Joystick
 import time
 
 backpin = 2

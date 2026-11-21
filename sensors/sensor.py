@@ -9,25 +9,36 @@ class Sensor:
 
         self.last_state = self.pin.value()
         self.count = 0
+        if self.sensor_type == "no_coin":
+            self.set_count()
+        
+    def set_count(self):
+        assert self.sensor_type == "no_coin"
+        
+        c = int(input("Enter the number of coins you want to insert"))
+        self.count = c
+        
 
     def update(self):
-        current = self.pin.value()
+        if self.sensor_type == "coin":
+            current = self.pin.value()
 
-#         # Human readable status
-#         if current == 1:
-#             status = "😮 CLEAR   (beam intact)"
-#         else:
-#             status = "🫣 BLOCKED (beam broken)"
-# 
-#         print(f"{self.sensor_type}: {status}")
+    #         # Human readable status
+    #         if current == 1:
+    #             status = "😮 CLEAR   (beam intact)"
+    #         else:
+    #             status = "🫣 BLOCKED (beam broken)"
+    # 
+    #         print(f"{self.sensor_type}: {status}")
 
-        # Detect transition (CLEAR → BLOCKED)
-        if self.last_state == 1 and current == 0:
-            self.count += 1
-            print(f"{self.sensor_type.upper()} DETECTED! Count = {self.count}")
+            # Detect transition (CLEAR → BLOCKED)
+            if self.last_state == 1 and current == 0:
+                self.count += 1
+                print(f"{self.sensor_type.upper()} DETECTED! Count = {self.count}")
 
-        self.last_state = current
-        return self.count
+            self.last_state = current
+            return self.count
+            
     
     def detected(self):
         return self.count > 0
